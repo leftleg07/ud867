@@ -32,38 +32,43 @@
     https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:ordering_tasks
 */
 
-task brew {
+task ("brew").apply {
     doLast {
-        println "Brewing. Drip, drip, drip."
+        println ("Brewing. Drip, drip, drip.")
     }
 }
 
-task pour {
+task ("pour").apply {
+    dependsOn("brew")
     doLast {
-        println "Pouring. Glug, glug, glug."
+        println ("Pouring. Glug, glug, glug.")
     }
 }
 
-task addSweetener {
+task ("addSweetener").apply {
     doLast {
-        println "Adding sweetener. Stir, stir, stir."
+        println ("Adding sweetener. Stir, stir, stir.")
     }
 }
 
-task drink {
+task ("drink").apply {
+    dependsOn("pour")
+    mustRunAfter("addSweetener")
     doLast {
-        println "Drinking. Gulp, gulp, gulp."
+        println ("Drinking. Gulp, gulp, gulp.")
     }
 }
 
-task blackCoffee {
+task ("blackCoffee").apply {
+    dependsOn("drink")
     doLast {
-        println "Mmmm, bitter! just how I like it."
+        println ("Mmmm, bitter! just how I like it.")
     }
 }
 
-task sweetCoffee {
+task ("sweetCoffee").apply {
+    dependsOn("drink", "addSweetener")
     doLast {
-        println "Mmmm, sweet! just how I like it."
+        println ("Mmmm, sweet! just how I like it.")
     }
 }

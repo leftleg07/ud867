@@ -15,16 +15,16 @@ Let's declare and configure some tasks to represent this process.
 
 */
 
-task putOnSocks {
+task("putOnSocks").apply {
     doLast {
-        println "Putting on Socks."
+        println("Putting on Socks.")
     }
 }
 
-task putOnShoes {
-    dependsOn "putOnSocks"
+val putOnShoes = task("putOnShoes").apply {
+    dependsOn("putOnSocks")
     doLast {
-        println "Putting on Shoes."
+        println("Putting on Shoes.")
     }
 }
 
@@ -42,16 +42,16 @@ relationship between them.
 
 */
 
-task eatBreakfast {
-    finalizedBy "brushYourTeeth"
-    doLast{
-        println "Om nom nom breakfast!"
+task("eatBreakfast").apply {
+    finalizedBy("brushYourTeeth")
+    doLast {
+        println("Om nom nom breakfast!")
     }
 }
 
-task brushYourTeeth {
+task("brushYourTeeth") {
     doLast {
-        println "Brushie Brushie Brushie."
+        println("Brushie Brushie Brushie.")
     }
 }
 
@@ -72,16 +72,16 @@ shower first. Let's create those tasks and the relationship between them.
 
 */
 
-task takeShower {
+task ("takeShower").apply {
     doLast {
-        println "Taking a shower."
+        println ("Taking a shower.")
     }
 }
 
-task putOnFragrance {
-    shouldRunAfter "takeShower"
+task ("putOnFragrance").apply {
+    shouldRunAfter ("takeShower")
     doLast{
-        println "Smellin' fresh!"
+        println ("Smellin' fresh!")
     }
 }
 
@@ -95,10 +95,10 @@ depend on multiple tasks:
 
 */
 
-task getReady {
+task ("getReady").apply {
     // Remember that when assigning a collection to a property, we need the
     // equals sign
-    dependsOn = ["takeShower", "eatBreakfast", "putOnShoes"]
+    dependsOn("putOnFragrance", "takeShower", "eatBreakfast", "putOnShoes")
 }
 
 /*
@@ -108,7 +108,7 @@ Oops, we put on our shoes before taking a shower! Let's put in another
 
 */
 
-putOnShoes.mustRunAfter takeShower
+putOnShoes.mustRunAfter("takeShower")
 
 /*
 
@@ -118,10 +118,10 @@ that depends on every task that starts with "putOn".
 
 */
 
-task getEquipped {
-    dependsOn tasks.matching{ task -> task.name.startsWith("putOn")}
+task ("getEquipped").apply {
+    dependsOn(tasks.matching{ task -> task.name.startsWith("putOn")})
     doLast {
-        println "All geared up!"
+        println ("All geared up!")
     }
 }
 
