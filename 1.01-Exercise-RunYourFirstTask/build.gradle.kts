@@ -21,10 +21,12 @@ Challenges:
 
 */
 
-task hello {
-    description "Hey student! Run this one :D"
-    group "Our demo"
-    doLast {
-        println "Hello World!"
+tasks {
+    register("hello") {
+        group = "Our demo"
+        description = "Hey student! Run this one :D"
+        doLast {
+            println("Hello world!")
+        }
     }
 }

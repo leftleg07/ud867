@@ -22,9 +22,11 @@ selecting View > Syntax > Open all with current extension as... > Groovy
 
 */
 
-task groovy {}
+tasks {
+    register("groovy") {}
+}
 
-println "Hello Groovy!"
+println("Hello Groovy!")
 
 /*
 
@@ -34,12 +36,12 @@ well as access the standard library. Let's make a Java class.
 */
 
 class JavaGreeter {
-    public void sayHello() {
-        System.out.println("Hello Java!");
+    fun sayHello() {
+        println("Hello Java")
     }
 }
 
-JavaGreeter greeter = new JavaGreeter()
+val greeter = JavaGreeter()
 greeter.sayHello()
 
 /*
@@ -49,7 +51,7 @@ That also means you don't need to declare the types of variables.
 
 */
 
-def foo = 6.5
+val foo = 6.5
 
 /*
 
@@ -59,7 +61,7 @@ inserted.
 
 */
 
-println "foo has value: $foo"
+println("foo has value: $foo")
 
 /*
 
@@ -67,7 +69,7 @@ We can also surround any Groovy code with a dollar sign and curly braces.
 
 */
 
-println "Let's do some math. 5 + 6 = ${5 + 6}"
+println("Let's do some math. 5 + 6 = ${5 + 6}")
 
 /*
 
@@ -76,9 +78,8 @@ type of a variable using `foo.class`.
 
 */
 
-println "foo is of type: ${foo.class} and has value: $foo"
-foo = "a string"
-println "foo is now of type: ${foo.class} and has value: $foo"
+val foo2 = "a string"
+println("foo is now of type: ${foo2::class}  and has value: $foo2")
 
 /*
 
@@ -93,9 +94,8 @@ domain specific language. Let's define a function.
 
 */
 
-def doubleIt(n) {
-    n + n // Note we don't need a return statement
-}
+fun doubleIt(n: Int) = n + n // Note we don't need a return statement
+
 
 /*
 
@@ -105,44 +105,5 @@ the block is returned. Let's give it a try.
 
 */
 
-foo = 5
-println "doubleIt($foo) = ${doubleIt(foo)}"
-
-/*
-
-Even more interestingly, since the plus sign is overloaded to concatenate
-strings, we can call our function with a string as well.
-
-*/
-
-foo = "foobar"
-println "doubleIt($foo) = ${doubleIt(foo)}"
-
-/*
-
-Let's define a few functions to show off one of the coolest syntactic features
-of Groovy; you don't need to use parentheses to call a function with at least
-one argument.
-
-*/
-
-def noArgs() {
-    println "Called the no args function"
-}
-
-def oneArg(x) {
-    println "Called the 1 arg function with $x"
-    x
-}
-
-def twoArgs(x, y) {
-    println "Called the 2 arg function with $x and $y"
-    x + y
-}
-
-oneArg 500 // Look, Ma! No parentheses!
-twoArgs 200, 300
-noArgs()
-//noArgs // Doesn't work
-//twoArgs oneArg 500, 200 // Also doesn't work as it's ambiguous
-twoArgs oneArg(500), 200 // Fixed the ambiguity
+val foo3 = 5
+println("doubleIt($foo3) = ${doubleIt(foo3)}")
