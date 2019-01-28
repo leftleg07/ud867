@@ -18,3 +18,16 @@ Hint: Don't forget about the solution file!
 https://docs.gradle.org/current/dsl/org.gradle.api.Task.html#org.gradle.api.Task:description
 
 */
+
+task("hello").apply {
+    // We can also set a group to organize tasks
+    group = "Udacity"
+
+    // 2. Set a description
+    description = "This is my first Gradle task"
+
+    // 3. Add a task action which prints to the console
+    doLast {
+        println("Hello World!")
+    }
+}
