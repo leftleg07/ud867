@@ -29,7 +29,7 @@ Because Groovy syntax is awesome, we can leave off the parentheses.
 
 */
 
-task "myTask3"
+task("myTask3")
 
 /*
 
@@ -43,7 +43,7 @@ http://stackoverflow.com/questions/27584463/understing-the-groovy-syntax-in-a-gr
 
 */
 
-task myTask4
+val myTask4 = task("myTask4")
 
 /*
 
@@ -64,7 +64,7 @@ the end of the list using the `doLast` method.
 
 */
 
-myTask4.doLast {println "Do this last"}
+myTask4.doLast { println("Do this last") }
 
 /*
 
@@ -72,7 +72,7 @@ We can also add actions to the start of the list using `doFirst`.
 
 */
 
-myTask4.doFirst {println "Do this first"}
+myTask4.doFirst { println("Do this first") }
 
 /*
 
@@ -81,11 +81,11 @@ also give the task a configuration closure when it's declared.
 
 */
 
-task myTask6 {
-    description "Here's a task with a configuration block"
-    group "Some group"
+task("myTask6").apply {
+    description = "Here's a task with a configuration block"
+    group = "Some group"
     doLast {
-        println "Here's the action"
+        println("Here's the action")
     }
 }
 
@@ -104,12 +104,13 @@ assigning a collection to a property.
 
 */
 
-task myTask7 {
-    description("Description") // Function call works
+task("myTask7").apply {
+    setDescription("Description") // Function call works
     //description "Description" // This is identical to the line above
     group = "Some group" // Assignment also works
-    doLast { // We can also omit the parentheses, because Groovy syntax
-        println "Here's the action"
+    doLast {
+        // We can also omit the parentheses, because Groovy syntax
+        println("Here's the action")
     }
 }
 
@@ -120,9 +121,10 @@ using the following syntax:
 
 */
 
-task myTask8(description: "Another description") {
+task("myTask8").apply {
+    description = "Another description"
     doLast {
-        println "Doing something"
+        println("Doing something")
     }
 }
 
