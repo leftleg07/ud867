@@ -7,17 +7,20 @@ from the scope in which they're declared.
 
 */
 
-task groovy {}
+tasks {
+    register("kotlin") {}
+}
 
-def foo = "One million dollars"
-def myClosure = {
-    println "Hello from a closure"
-    println "The value of foo is $foo"
+
+val foo = "One million dollars"
+val myClosure = {
+    println("Hello from a closure")
+    println("The value of foo is $foo")
 }
 
 myClosure()
-def bar = myClosure
-def baz = bar
+val bar = myClosure
+val baz = bar
 baz()
 
 /*
@@ -26,7 +29,7 @@ Closures have a different notation for arguments.
 
 */
 
-def doubleIt = { x -> x + x}
+val doubleIt = { x: Int -> x + x }
 
 /*
 
@@ -36,28 +39,27 @@ twice.
 
 */
 
-def applyTwice(func, arg){
-    func(func(arg))
-}
+fun applyTwice(func: (Int) -> Int, arg: Int) = func(func(arg))
 
-foo = 5
-def fooDoubledTwice = applyTwice(doubleIt, foo)
-println "Applying doubleIt twice to $foo equals $fooDoubledTwice"
+
+val foo2 = 5
+val fooDoubledTwice = applyTwice(doubleIt, foo2)
+println("Applying doubleIt twice to $foo2 equals $fooDoubledTwice")
 
 /*
 
 A language where functions are just objects that can be passed around is
 said to have "first class functions". The implications of this style of
 programming go quite deep and beyond the scope of this course. A search for
-"first class function" or "functional programming" will give you more
+    "first class function" or "functional programming" will give you more
 information.
 
-Groovy allows for very sophisticated list processing using closures. We can
+        Groovy allows for very sophisticated list processing using closures. We can
 declare a list using a literal.
 
 */
 
-def myList = ["Gradle", "Groovy", "Android"]
+val myList = arrayOf("Gradle", "Groovy", "Android")
 
 /*
 
@@ -65,8 +67,8 @@ We can execute a closure for each item in the list.
 
 */
 
-def printItem = {item -> println "List item: $item"}
-myList.each(printItem)
+val printItem = { item: String -> println("List item: $item") }
+myList.forEach(printItem)
 
 /*
 
@@ -76,7 +78,7 @@ argument, by default that argument is just called `it`.
 
 */
 
-myList.each{println "Compactly printing each list item: $it"}
+myList.forEach { println("Compactly printing each list item: $it") }
 
 /*
 
@@ -87,33 +89,18 @@ getters and setters for class properties.
 */
 
 class GroovyGreeter {
-    String greeting = "Default greeting"
-    def printGreeting(){println "Greeting: $greeting"}
+    var greeting = "Default greeting"
+    fun printGreeting() {
+        println("Greeting: $greeting")
+    }
 }
 
-def myGroovyGreeter = new GroovyGreeter()
+val myGroovyGreeter = GroovyGreeter()
 
 myGroovyGreeter.printGreeting()
 myGroovyGreeter.greeting = "My custom greeting"
 myGroovyGreeter.printGreeting()
 
-/*
-
-The last Groovy feature we'll cover is that closures can have a delegate
-object. Any variables or methods referenced in the closure that don't have a
-local definition are then evaluated against the closure's delegate. Let's make
-a closure that will access the property and method of our GroovyGreeter class.
-
-*/
-
-def greetingClosure = {
-    greeting = "Setting the greeting from a closure"
-    printGreeting()
-}
-
-// greetingClosure() // This doesn't work, because `greeting` isn't defined
-greetingClosure.delegate = myGroovyGreeter
-greetingClosure() // This works as `greeting` is a property of the delegate
 
 /*
 
