@@ -32,26 +32,26 @@
     https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:ordering_tasks
 */
 
-task ("brew").apply {
+task ("brew") {
     doLast {
         println ("Brewing. Drip, drip, drip.")
     }
 }
 
-task ("pour").apply {
+task ("pour") {
     dependsOn("brew")
     doLast {
         println ("Pouring. Glug, glug, glug.")
     }
 }
 
-task ("addSweetener").apply {
+task ("addSweetener") {
     doLast {
         println ("Adding sweetener. Stir, stir, stir.")
     }
 }
 
-task ("drink").apply {
+task ("drink") {
     dependsOn("pour")
     mustRunAfter("addSweetener")
     doLast {
@@ -59,14 +59,14 @@ task ("drink").apply {
     }
 }
 
-task ("blackCoffee").apply {
+task ("blackCoffee") {
     dependsOn("drink")
     doLast {
         println ("Mmmm, bitter! just how I like it.")
     }
 }
 
-task ("sweetCoffee").apply {
+task ("sweetCoffee") {
     dependsOn("drink", "addSweetener")
     doLast {
         println ("Mmmm, sweet! just how I like it.")

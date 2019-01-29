@@ -15,13 +15,13 @@ Let's declare and configure some tasks to represent this process.
 
 */
 
-task("putOnSocks").apply {
+task("putOnSocks") {
     doLast {
         println("Putting on Socks.")
     }
 }
 
-val putOnShoes = task("putOnShoes").apply {
+val putOnShoes = task("putOnShoes") {
     dependsOn("putOnSocks")
     doLast {
         println("Putting on Shoes.")
@@ -42,7 +42,7 @@ relationship between them.
 
 */
 
-task("eatBreakfast").apply {
+task("eatBreakfast") {
     finalizedBy("brushYourTeeth")
     doLast {
         println("Om nom nom breakfast!")
@@ -72,13 +72,13 @@ shower first. Let's create those tasks and the relationship between them.
 
 */
 
-task ("takeShower").apply {
+task ("takeShower") {
     doLast {
         println ("Taking a shower.")
     }
 }
 
-task ("putOnFragrance").apply {
+task ("putOnFragrance") {
     shouldRunAfter ("takeShower")
     doLast{
         println ("Smellin' fresh!")
@@ -95,7 +95,7 @@ depend on multiple tasks:
 
 */
 
-task ("getReady").apply {
+task ("getReady") {
     // Remember that when assigning a collection to a property, we need the
     // equals sign
     dependsOn("putOnFragrance", "takeShower", "eatBreakfast", "putOnShoes")
@@ -118,7 +118,7 @@ that depends on every task that starts with "putOn".
 
 */
 
-task ("getEquipped").apply {
+task ("getEquipped") {
     dependsOn(tasks.matching{ task -> task.name.startsWith("putOn")})
     doLast {
         println ("All geared up!")

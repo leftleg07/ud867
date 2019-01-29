@@ -5,7 +5,9 @@ specify the type as "Copy".
 
 */
 
-task copyTask(type: Copy)
+//task copyTask(type: Copy)
+task("copyTask", Copy::class) {}
+
 
 /*
 
@@ -18,9 +20,13 @@ directory.
 
 */
 
-task copyImages(type: Copy) {
-    from 'images'
-    into 'build'
+//task copyImages(type: Copy) {
+//    from 'images'
+//    into 'build'
+//}
+task("copyImages", Copy::class) {
+    from("images")
+    into("build")
 }
 
 
@@ -35,10 +41,15 @@ pattern.
 
 */
 
-task copyJpegs(type: Copy) {
-    from 'images'
-    include '*.jpg'
-    into 'build'
+//task copyJpegs(type: Copy) {
+//    from 'images'
+//    include '*.jpg'
+//    into 'build'
+//}
+task("copyJpegs", Copy::class) {
+    from("images")
+    include("*.jpg")
+    into("build")
 }
 
 /*
@@ -56,18 +67,32 @@ and all .gif files will be copied to "build/gif".
 
 */
 
-task copyImageFolders(type: Copy) {
-    from('images') {
-        include '*.jpg'
-        into 'jpeg'
+//task copyImageFolders(type: Copy) {
+//    from('images') {
+//        include '*.jpg'
+//        into 'jpeg'
+//    }
+//
+//    from('images') {
+//        include '*.gif'
+//        into 'gif'
+//    }
+//
+//    into 'build'
+//}
+
+task("copyImageFolders", Copy::class) {
+    from("images") {
+        include("*.jpg")
+        into("jpeg")
     }
 
-    from('images') {
-        include '*.gif'
-        into 'gif'
+    from("images") {
+        include("*.gif")
+        into("gif")
     }
 
-    into 'build'
+    into("build")
 }
 
 /*
@@ -82,10 +107,16 @@ Gradle Project interface provides a convenience method for creating files.
 
 */
 
-task zipImages(type: Zip) {
-    baseName = 'images'
-    destinationDir = file('build')
-    from 'images'
+//task zipImages(type: Zip) {
+//    baseName = 'images'
+//    destinationDir = file('build')
+//    from 'images'
+//}
+
+task("zipImages", Zip::class) {
+    archiveName = "images.zip"
+    destinationDir = file("build")
+    from("images")
 }
 
 /*
@@ -97,18 +128,33 @@ archive name and destination.
 
 */
 
-task zipImageFolders(type: Zip) {
-    baseName = 'images'
-    destinationDir = file('build')
+//task zipImageFolders(type: Zip) {
+//    baseName = 'images'
+//    destinationDir = file('build')
+//
+//    from('images') {
+//        include '*.jpg'
+//        into 'jpeg'
+//    }
+//
+//    from('images') {
+//        include '*.gif'
+//        into 'gif'
+//    }
+//}
 
-    from('images') {
-        include '*.jpg'
-        into 'jpeg'
+task("zipImageFolders", Zip::class) {
+    archiveName = "images.zip"
+    destinationDir = file("build")
+
+    from("images") {
+        include("*.jpg")
+        into("jpeg")
     }
 
-    from('images') {
-        include '*.gif'
-        into 'gif'
+    from("images") {
+        include("*.gif")
+        into("gif")
     }
 }
 
@@ -120,6 +166,10 @@ in our project. Let's create a task that deletes the "build" folder.
 
 */
 
-task deleteBuild(type: Delete) {
-    delete 'build'
+//task deleteBuild(type: Delete) {
+//    delete 'build'
+//}
+
+task("deleteBuild", Delete::class) {
+    delete("build")
 }

@@ -19,7 +19,7 @@ https://docs.gradle.org/current/dsl/org.gradle.api.Task.html#org.gradle.api.Task
 
 */
 
-task("hello").apply {
+task("hello") {
     // We can also set a group to organize tasks
     group = "Udacity"
 

@@ -81,7 +81,7 @@ also give the task a configuration closure when it's declared.
 
 */
 
-task("myTask6").apply {
+task("myTask6") {
     description = "Here's a task with a configuration block"
     group = "Some group"
     doLast {
@@ -104,7 +104,7 @@ assigning a collection to a property.
 
 */
 
-task("myTask7").apply {
+task("myTask7") {
     setDescription("Description") // Function call works
     //description "Description" // This is identical to the line above
     group = "Some group" // Assignment also works
@@ -121,7 +121,7 @@ using the following syntax:
 
 */
 
-task("myTask8").apply {
+task("myTask8") {
     description = "Another description"
     doLast {
         println("Doing something")
