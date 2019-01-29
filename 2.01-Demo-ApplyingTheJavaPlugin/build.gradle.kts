@@ -5,9 +5,10 @@ build script.
 
 */
 
-apply plugin: "java"
-
-
+//apply plugin: "java"
+plugins {
+    java
+}
 
 /*
 
@@ -48,10 +49,28 @@ part of the core Gradle functionality.
 */
 
 
-task execute(type: JavaExec) {
+//task execute(type: JavaExec) {
+//    main = "com.udacity.gradle.Person"
+//    // We'll talk about this shortly
+//    classpath = sourceSets.main.runtimeClasspath
+//}
+
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("src/main/java"))
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+task("execute", JavaExec::class) {
     main = "com.udacity.gradle.Person"
-    // We'll talk about this shortly
-    classpath = sourceSets.main.runtimeClasspath
+    classpath = sourceSets["main"].runtimeClasspath
 }
 
 /*

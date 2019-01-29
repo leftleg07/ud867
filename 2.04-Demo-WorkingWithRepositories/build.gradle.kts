@@ -12,12 +12,17 @@ directories we want to include.
 
 */
 
+//repositories {
+//    flatDir {
+//        dirs 'libs'
+//    }
+//}
+
 repositories {
     flatDir {
-        dirs 'libs'
+        dirs("libs")
     }
 }
-
 /*
 
 This is a great option if you're migrating an existing project to Gradle, or
@@ -50,7 +55,7 @@ the repository, expressed as a URL.
 
 repositories {
     maven {
-        url 'https://repo.foo.org/m2'
+        url = uri("https://repo.foo.org/m2")
     }
 }
 
@@ -64,10 +69,10 @@ block.
 
 repositories {
     ivy {
-        url 'https://repo.foo.org/ivy'
+        url = uri("https://repo.foo.org/ivy")
         credentials {
-            username 'user'
-            password 'secret'
+            username = "user"
+            password = "secret"
         }
     }
 }
@@ -82,6 +87,6 @@ repositories.
 
 repositories {
     ivy {
-        url 'file:///home/user/repo'
+        url = uri("file:///home/user/repo")
     }
 }

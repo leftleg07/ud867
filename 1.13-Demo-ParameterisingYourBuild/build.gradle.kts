@@ -14,9 +14,9 @@ Let's create a task that prints a greeting.
 
 */
 
-task printGreeting {
+task("printGreeting") {
     doLast {
-       println greeting
+        println(greeting)
     }
 }
 
@@ -48,9 +48,7 @@ that properties defined this way shadow all other definitions.
 
 */
 
-ext {
-    greeting = "Hello from inside the build script"
-}
+val greeting by extra { "Hello from inside the build script" }
 
 /*
 

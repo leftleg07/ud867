@@ -6,14 +6,14 @@ report showing how a particular dependency is included in your project.
 
 */
 
-apply plugin: 'java'
+plugins { java }
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.springframework:spring-core:4.1.1.RELEASE'
+    compile("org.springframework:spring-core:4.1.1.RELEASE")
 }
 
 /*
@@ -52,7 +52,7 @@ the 'commons-logging' library to our project.
 */
 
 dependencies {
-    compile 'commons-logging:commons-logging:1.2'
+    compile("commons-logging:commons-logging:1.2")
 }
 
 /*

@@ -11,7 +11,7 @@ basic implementation of the `Task` interface.
 
  */
 
-class MyTask extends DefaultTask {}
+class MyTask : DefaultTask()
 
 /*
 
@@ -25,10 +25,10 @@ action that simply prints a string out to the console.
 
 */
 
-class HelloTask extends DefaultTask {
+open class HelloTask : DefaultTask() {
     @TaskAction
-    void doAction() {
-        println 'Hello World'
+    fun doAction() {
+        println("Hello World")
     }
 }
 
@@ -43,7 +43,7 @@ called when the task is executed.
 
 */
 
-task hello(type: HelloTask)
+task("hello", HelloTask::class) {}
 
 /*
 
@@ -54,12 +54,12 @@ and setter methods.
 
 */
 
-class HelloNameTask extends DefaultTask {
-    String firstName
+open class HelloNameTask : DefaultTask() {
+    lateinit var firstName: String
 
     @TaskAction
-    void doAction() {
-        println "Hello, $firstName"
+    fun doAction() {
+        println("Hello, $firstName")
     }
 }
 
@@ -70,9 +70,10 @@ console.
 
 */
 
-task helloName(type: HelloNameTask) {
-    firstName = 'Jeremy'
+task("helloName", HelloNameTask::class) {
+    firstName = "Jeremy"
 }
+
 
 /*
 

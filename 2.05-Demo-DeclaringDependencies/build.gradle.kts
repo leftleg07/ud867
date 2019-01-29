@@ -9,8 +9,14 @@ dependencies.
 
 */
 
+plugins { java }
+
+repositories {
+    jcenter()
+}
+
 dependencies {
-    compile 'com.google.guava:guava:18.0'
+    implementation("com.google.guava:guava:18.0")
 }
 
 /*
@@ -27,7 +33,7 @@ A Groovy map syntax can also be used to identify dependencies.
 */
 
 dependencies {
-    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    implementation(group = "com.google.guava", name = "guava", version = "18.0")
 }
 
 /*
@@ -41,7 +47,7 @@ dependencies by creating a `FileCollection`.
 */
 
 dependencies {
-    compile files('libs/foo.jar', 'libs/bar.jar')
+    implementation(files("libs/foo.jar", "libs/bar.jar"))
 }
 
 /*
@@ -52,7 +58,7 @@ filters. This is useful for including a number of files within a directory.
 */
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
+    implementation(fileTree("dir" to "libs", "include" to "*.jar"))
 }
 
 /*
